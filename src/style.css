@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(81, 81, 81);
+  position: relative;
+}
+
+.overlay {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #0000009a;
+  color: #598419;
+
+  position: fixed;
+  inset: 0;
+
+  z-index: 2;
+}
+
+.overlay-content {
+  position: relative;
+  width: 60%;
+  height: 60%;
+
+  border-radius: 10px;
+  background: #dfdfdf9a;
+
+  overflow: hidden;
+
+  z-index: 2;
+}
+
+.overlay-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(to bottom, #87cefa 0%, #bdd8e3 100%);
+}
+
+.overlay-score {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.overlay-footer {
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  height: 95vh;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #87cefa 0%, #bdd8e3 100%);
+
+  box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(121, 181, 31, 0.249);
+  border-bottom: 10px solid #79b51f;
+  border-radius: 10px;
+}
+
+.clouds,
+.clouds-2 {
+  position: absolute;
+  top: 70px;
+  width: 400px;
+  animation: clouds-animate 20s infinite linear;
+}
+
+.clouds-2 {
+  top: 210px;
+  animation: clouds-animate 15s infinite linear;
+}
+
+.mario {
+  position: absolute;
+  width: 150px;
+  bottom: 0;
+}
+
+.jump {
+  animation: mario-jump 500ms linear;
+}
+
+.dead {
+  animation: mario-dead 1s linear;
+}
+
+.pipe {
+  position: absolute;
+  width: 65px;
+  bottom: 0;
+
+  animation: pipe-animate 1.5s infinite linear;
+}
+
+.score {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: #598419;
+
+  padding: 10px;
+  background: #bdd8e3;
+  border-radius: 10px;
+  box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes clouds-animate {
+  from {
+    right: -400px;
+  }
+  to {
+    right: 1250px;
+  }
+}
+
+@keyframes mario-jump {
+  0% {
+    bottom: 0;
+  }
+  40% {
+    bottom: 120px;
+  }
+  50% {
+    bottom: 120px;
+  }
+  60% {
+    bottom: 120px;
+  }
+  100% {
+    bottom: 0;
+  }
+}
+
+@keyframes mario-dead {
+  0% {
+    bottom: 0;
+  }
+
+  50% {
+    bottom: 120px;
+  }
+
+  100% {
+    bottom: -200px;
+  }
+}
+
+@keyframes pipe-animate {
+  from {
+    right: -70px;
+  }
+  to {
+    right: 1250px;
+  }
+}
