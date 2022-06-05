@@ -4,16 +4,27 @@ const pipe = document.querySelector('.pipe');
 const overlay = document.querySelector('.overlay');
 const reset = document.querySelector('.reset');
 const overlayScore = document.querySelector('.overlay-score');
+const startGameInfo = document.querySelector('.start-game');
 
 let countScore = 0;
 let startGame = true;
 let timerVerifyDead;
 let timerScore;
 
+startGameInfo.innerHTML =
+  'Pressione qualquer tecla para iniciar <br/> O tempo é contabilizado a cada segundo';
+
+reset.addEventListener('click', () => window.location.reload());
+
 window.addEventListener('keypress', () => {
   pipe.classList.add('pipeRun');
+  mario.classList.add('jump');
+
+  setTimeout(() => mario.classList.remove('jump'), 500);
 
   if (startGame) {
+    startGameInfo.innerHTML = '';
+    startGameInfo.style.background = 'transparent';
     timerScore = setInterval(() => {
       countScore++;
       score.innerHTML = `SCORE ${countScore}`;
@@ -54,25 +65,3 @@ const handleLogicForGameOver = () => {
     clearInterval(timerVerifyDead);
   }
 };
-
-const handleResetGame = () => {
-  window.location.reload();
-
-  const timer = setInterval(() => {
-    handleLogicForGameOver(timer);
-  }, 10);
-};
-
-reset.addEventListener('click', () => {
-  handleResetGame();
-});
-
-window.addEventListener('keypress', () => {
-  mario.classList.add('jump');
-  setTimeout(() => mario.classList.remove('jump'), 500);
-
-  //handle mario reset game
-  if (overlay.style.display === 'flex') {
-    handleResetGame();
-  }
-});
