@@ -10,6 +10,7 @@ let countScore = 0;
 let startGame = true;
 let timerVerifyDead;
 let timerScore;
+let timerSpeed;
 
 startGameInfo.innerHTML =
   'Pressione qualquer tecla para iniciar <br/> O tempo é contabilizado a cada segundo';
@@ -23,12 +24,22 @@ window.addEventListener('keypress', () => {
   setTimeout(() => mario.classList.remove('jump'), 500);
 
   if (startGame) {
+    let pipeSpeed = 1.5;
     startGameInfo.innerHTML = '';
     startGameInfo.style.background = 'transparent';
     timerScore = setInterval(() => {
       countScore++;
       score.innerHTML = `SCORE ${countScore}`;
     }, 1000);
+
+    timerSpeed = setInterval(() => {
+      pipeSpeed -= 0.1;
+      if (pipeSpeed <= 0) {
+        pipeSpeed = 0.6;
+      }
+      console.log({ pipeSpeed });
+      pipe.style.animationDelay = `pipe-animate ${pipeSpeed}s infinite linear`;
+    }, 1000 * 10);
   }
 
   startGame = false;
