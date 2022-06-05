@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Orbitron', sans-serif;
 }
 
 body {
@@ -148,6 +149,19 @@ body {
   background: #bdd8e3;
   border-radius: 10px;
   box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.1);
+}
+
+.start-game {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px
 }
 
 @keyframes clouds-animate {
