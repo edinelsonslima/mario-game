@@ -6,21 +6,28 @@ const reset = document.querySelector('.reset');
 const overlayScore = document.querySelector('.overlay-score');
 
 let countScore = 0;
+let startGame = true;
+let timerVerifyDead;
+let timerScore;
 
 window.addEventListener('keypress', () => {
   pipe.classList.add('pipeRun');
 
-  while (!mario.classList.contains('dead')) {
-    countScore++;
-    score.innerHTML = `SCORE ${countScore}`;
+  if (startGame) {
+    timerScore = setInterval(() => {
+      countScore++;
+      score.innerHTML = `SCORE ${countScore}`;
+    }, 1000);
   }
 
-  const timerVerifyDead = setInterval(() => {
-    handleLogicForGameOver(timerVerifyDead);
+  startGame = false;
+
+  timerVerifyDead = setInterval(() => {
+    handleLogicForGameOver();
   }, 10);
 });
 
-const handleLogicForGameOver = (timer1) => {
+const handleLogicForGameOver = () => {
   const pipeLocalization = pipe.offsetLeft;
   const marioLocalization = +window
     .getComputedStyle(mario)
@@ -43,7 +50,8 @@ const handleLogicForGameOver = (timer1) => {
     overlayScore.innerHTML = `SCORE ${countScore}`;
     overlay.style.display = 'flex';
 
-    return clearInterval(timer1);
+    clearInterval(timerScore);
+    clearInterval(timerVerifyDead);
   }
 };
 
@@ -62,9 +70,6 @@ reset.addEventListener('click', () => {
 window.addEventListener('keypress', () => {
   mario.classList.add('jump');
   setTimeout(() => mario.classList.remove('jump'), 500);
-
-  //handle mario change score
-  handleChangeScore();
 
   //handle mario reset game
   if (overlay.style.display === 'flex') {
