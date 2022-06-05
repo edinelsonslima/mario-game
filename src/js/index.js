@@ -7,20 +7,20 @@ const overlayScore = document.querySelector('.overlay-score');
 
 let countScore = 0;
 
-const timerReset = setInterval(() => {
-  handleLogicForGameOver(timerReset);
-}, 10);
+window.addEventListener('keypress', () => {
+  pipe.classList.add('pipeRun');
 
-const handleChangeScore = () => {
-  setTimeout(() => {
-    if (!mario.classList.contains('dead')) {
-      countScore++;
-      score.innerHTML = `SCORE ${countScore}`;
-    }
-  }, 900);
-};
+  while (!mario.classList.contains('dead')) {
+    countScore++;
+    score.innerHTML = `SCORE ${countScore}`;
+  }
 
-const handleLogicForGameOver = (timerClear) => {
+  const timerVerifyDead = setInterval(() => {
+    handleLogicForGameOver(timerVerifyDead);
+  }, 10);
+});
+
+const handleLogicForGameOver = (timer1) => {
   const pipeLocalization = pipe.offsetLeft;
   const marioLocalization = +window
     .getComputedStyle(mario)
@@ -42,24 +42,13 @@ const handleLogicForGameOver = (timerClear) => {
 
     overlayScore.innerHTML = `SCORE ${countScore}`;
     overlay.style.display = 'flex';
-    return clearInterval(timerClear);
+
+    return clearInterval(timer1);
   }
 };
 
 const handleResetGame = () => {
-  mario.src = './src/assets/mario.gif';
-  mario.style.marginLeft = '';
-  mario.style.bottom = '0';
-  mario.style.width = '150px';
-  mario.classList.remove('dead');
-
-  countScore = 0;
-
-  overlay.style.display = 'none';
-  score.innerHTML = `SCORE ${countScore}`;
-
-  pipe.style.animation = 'pipe-animate 1.5s infinite linear';
-  pipe.style.left = '';
+  window.location.reload();
 
   const timer = setInterval(() => {
     handleLogicForGameOver(timer);
@@ -70,8 +59,7 @@ reset.addEventListener('click', () => {
   handleResetGame();
 });
 
-window.addEventListener('keydown', () => {
-  //handle mario jump
+window.addEventListener('keypress', () => {
   mario.classList.add('jump');
   setTimeout(() => mario.classList.remove('jump'), 500);
 

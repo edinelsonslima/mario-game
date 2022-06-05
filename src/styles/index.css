@@ -126,12 +126,15 @@ body {
   animation: mario-dead 1s linear;
 }
 
+.pipeRun {
+  animation: pipe-animate 1.5s infinite linear;
+}
+
 .pipe {
   position: absolute;
   width: 65px;
   bottom: 0;
-
-  animation: pipe-animate 1.5s infinite linear;
+  right: 10px;
 }
 
 .score {
